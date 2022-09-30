@@ -1,4 +1,4 @@
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, Input, FormControl, Text } from "@chakra-ui/react";
 
 export const SearchForm = () => {
   return (
@@ -14,10 +14,17 @@ export const SearchForm = () => {
     >
       <h1>Lots of dogs! 🐕</h1>
       <p>See photos of your favorite dogs</p>
-      <form>
-        <input type="text" name="breed" placeholder="Enter a dog breed" />
+      <FormControl
+        sx={{
+          width: "50%",
+          display: "flex",
+          gap: "5px",
+        }}
+      >
+        <Input type="text" name="breed" placeholder="Enter a dog breed" />
         <Button variant="outline">Fetch</Button>
-      </form>
+      </FormControl>
+      <div>{/* to display suggestion */}</div>
     </Box>
   );
 };
