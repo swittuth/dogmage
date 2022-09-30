@@ -8,7 +8,10 @@ const url = "https://dog.ceo/api/breeds/list/all";
 
 async function loadData(url) {
   const dogList = await fetch(url).then((res) => res.json());
-  const dataString = JSON.stringify(dogList);
+  const dataObj = {
+    breed: dogList.message,
+  };
+  const dataString = JSON.stringify(dataObj);
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   const fileName = path.resolve(__dirname, "./breeds.json");
