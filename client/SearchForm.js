@@ -1,10 +1,18 @@
-import { Button, Box, Input, FormControl, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  Input,
+  FormControl,
+  Text,
+  Select,
+} from "@chakra-ui/react";
 import { update } from "lodash";
 import { useState, useEffect } from "react";
 
 export const SearchForm = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [search, setSearch] = useState([]);
+  const [limit, setLimit] = useState(0);
 
   useEffect(() => {
     updateSuggestion();
@@ -52,8 +60,12 @@ export const SearchForm = () => {
         <FormControl
           sx={{
             width: "50%",
-            display: "flex",
+            display: "grid",
             gap: "5px",
+            gridTemplateAreas: `
+              "search limit fetch"
+            `,
+            gridTemplateColumns: "7fr 2fr 1fr",
           }}
         >
           <Input
@@ -64,8 +76,30 @@ export const SearchForm = () => {
             }}
             name="breed"
             placeholder="Enter a dog breed"
+            sx={{
+              gridArea: "search",
+            }}
           />
-          <Button variant="outline">Fetch</Button>
+          <Select
+            placeholder="Limit"
+            sx={{
+              gridArea: "limit",
+            }}
+          >
+            <option value={1}>1</option>
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+            <option value="All">All</option>
+          </Select>
+          <Button
+            variant="outline"
+            sx={{
+              gridArea: "fetch",
+            }}
+          >
+            Fetch
+          </Button>
         </FormControl>
       </Box>
       <Box
@@ -83,7 +117,7 @@ export const SearchForm = () => {
           }}
         >
           {suggestions.map((breed) => {
-            return <p>{breed}</p>;
+            return <Text>{breed}</Text>;
           })}
         </Box>
       </Box>
