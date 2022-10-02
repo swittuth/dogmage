@@ -1,8 +1,26 @@
 import { Button, Box, Input, FormControl, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { update } from "lodash";
+import { useState, useEffect } from "react";
 
 export const SearchForm = () => {
   const [suggestions, setSuggestions] = useState([]);
+  const [search, setSearch] = useState([]);
+
+  useEffect(() => {
+    updateSuggestion();
+  }, [search]);
+
+  async function updateSuggestion() {
+    const data = await fetch(
+      "http://localhost:3011/dog/breed/suggestion/" + search
+    ).then((res) => res.json());
+
+    if (data.json.data.length === 0) {
+      setSuggestions([]);
+    } else {
+      setSuggestions(data.json.data);
+    }
+  }
 
   return (
     <Box
@@ -38,7 +56,15 @@ export const SearchForm = () => {
             gap: "5px",
           }}
         >
-          <Input type="text" name="breed" placeholder="Enter a dog breed" />
+          <Input
+            type="text"
+            onChange={(event) => {
+              console.log(event.target.value);
+              setSearch(event.target.value);
+            }}
+            name="breed"
+            placeholder="Enter a dog breed"
+          />
           <Button variant="outline">Fetch</Button>
         </FormControl>
       </Box>
@@ -57,7 +83,7 @@ export const SearchForm = () => {
           }}
         >
           {suggestions.map((breed) => {
-            <p>{breed}</p>;
+            return <p>{breed}</p>;
           })}
         </Box>
       </Box>
