@@ -1,6 +1,9 @@
 import { Button, Box, Input, FormControl, Text } from "@chakra-ui/react";
+import { useState } from "react";
 
 export const SearchForm = () => {
+  const [suggestions, setSuggestions] = useState([]);
+
   return (
     <Box
       sx={{
@@ -53,8 +56,9 @@ export const SearchForm = () => {
             width: "50%",
           }}
         >
-          <Text>adsfdsa</Text>
-          <Text>asdfsad</Text>
+          {suggestions.map((breed) => {
+            <p>{breed}</p>;
+          })}
         </Box>
       </Box>
     </Box>
