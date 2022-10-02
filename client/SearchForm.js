@@ -55,8 +55,6 @@ export const SearchForm = () => {
           justifyContent: "flex-end",
         }}
       >
-        <h1>Lots of dogs! 🐕</h1>
-        <p>See photos of your favorite dogs</p>
         <FormControl
           sx={{
             width: "50%",
