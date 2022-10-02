@@ -15,7 +15,7 @@ async function loadData(url) {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   const fileName = path.resolve(__dirname, "./breeds.json");
-  fs.writeFile(fileName, dataString, "utf8", () => {
+  fs.writeFile(fileName, dataString, "utf8", (err, data) => {
     console.log("success");
   });
 }
