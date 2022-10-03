@@ -7,25 +7,24 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { update } from "lodash";
+import { eventNames } from "process";
 import { useState, useEffect } from "react";
 
 export const SearchForm = () => {
   const [suggestions, setSuggestions] = useState([]);
-  const [search, setSearch] = useState([]);
   const [limit, setLimit] = useState(0);
 
-  useEffect(() => {
-    updateSuggestion();
-  }, [search]);
+  // useEffect(() => {
+  //   updateSuggestion();
+  // }, [search]);
 
-  async function updateSuggestion() {
-    const data = await fetch(
-      "http://localhost:3011/dog/breed/suggestion/" + search
-    ).then((res) => res.json());
-
-    if (data.json.data.length === 0) {
+  async function updateSuggestion(event) {
+    if (event.target.value === "") {
       setSuggestions([]);
     } else {
+      const data = await fetch(
+        "http://localhost:3011/dog/breed/suggestion/" + event.target.value
+      ).then((res) => res.json());
       setSuggestions(data.json.data);
     }
   }
@@ -69,8 +68,7 @@ export const SearchForm = () => {
           <Input
             type="text"
             onChange={(event) => {
-              console.log(event.target.value);
-              setSearch(event.target.value);
+              updateSuggestion(event);
             }}
             name="breed"
             placeholder="Enter a dog breed"
@@ -115,7 +113,7 @@ export const SearchForm = () => {
           }}
         >
           {suggestions.map((breed) => {
-            return <Text>{breed}</Text>;
+            return <Text key={`${breed}`}>{breed}</Text>;
           })}
         </Box>
       </Box>
