@@ -13,6 +13,7 @@ import { useState, useMemo } from "react";
 export const SearchForm = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [typing, setTyping] = useState(false);
+  const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(0);
 
   const inputHandler = (event) => {
@@ -25,8 +26,13 @@ export const SearchForm = () => {
     if (event.target.value === "") {
       setSuggestions([]);
     } else {
+      const [breed, type] = event.target.value.split(" ");
+      const searchValue =
+        typeof type === "undefined"
+          ? breed.toLowerCase()
+          : breed.toLowerCase() + "-" + type.toLowerCase();
       const data = await fetch(
-        "http://localhost:3011/dog/breed/suggestion/" + event.target.value
+        "http://localhost:3011/dog/breed/suggestion/" + searchValue
       ).then((res) => res.json());
       setSuggestions(data.json.data);
     }
@@ -71,9 +77,11 @@ export const SearchForm = () => {
           <Input
             type="text"
             onChange={(event) => {
+              setSearch(event.target.value);
               setTyping(true);
               debouncedHandler(event);
             }}
+            value={search}
             name="breed"
             placeholder="Enter a dog breed"
             sx={{
@@ -120,6 +128,7 @@ export const SearchForm = () => {
             overflow: "auto",
             padding: "2px",
             gap: "5px",
+            alignItems: "center",
           }}
         >
           {typing ? (
@@ -129,8 +138,12 @@ export const SearchForm = () => {
               return (
                 <Text
                   key={`${breed}`}
+                  onClick={() => {
+                    setSearch(breed);
+                  }}
                   sx={{
                     backgroundColor: "#CBD5E0",
+                    width: "100%",
                     cursor: "pointer",
                     borderRadius: "5px",
                     padding: "3px",
