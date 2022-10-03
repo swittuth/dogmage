@@ -8,14 +8,15 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import debounce from "lodash.debounce";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
+import { InfoContext } from "../infocontext";
 
 export const SearchForm = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [typing, setTyping] = useState(false);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(0);
-  const [imageArray, setImageArray] = useState([]);
+  const { imageArray, setImageArray } = useContext(InfoContext);
 
   const inputHandler = (event) => {
     updateSuggestion(event);
@@ -55,7 +56,6 @@ export const SearchForm = () => {
       );
     }
     setImageArray(dogImages.images);
-    console.log(dogImages);
   }
 
   return (
