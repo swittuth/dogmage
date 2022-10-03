@@ -30,7 +30,7 @@ export const SearchForm = () => {
       const searchValue =
         typeof type === "undefined"
           ? breed.toLowerCase()
-          : breed.toLowerCase() + "-" + type.toLowerCase();
+          : breed.toLowerCase() + "/" + type.toLowerCase();
       const data = await fetch(
         "http://localhost:3011/dog/breed/suggestion/" + searchValue
       ).then((res) => res.json());

@@ -1,15 +1,15 @@
 import Koa from "koa";
-import Router from "@koa/router";
 import cors from "@koa/cors";
-import fetch from "isomorphic-fetch";
-import { breedRoutes } from "./routes/breedRoutes.js";
+import { breedRoute } from "./routes/breedRoute.js";
+import { imageRoute } from "./routes/imageRoute.js";
 
 const app = new Koa();
 const port = 3011;
 
 app.use(cors({ origin: "*" }));
 
-app.use(breedRoutes.routes());
+app.use(breedRoute.routes());
+app.use(imageRoute.routes());
 
 app.use(async (ctx, next) => {
   await next();
