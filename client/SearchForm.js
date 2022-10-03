@@ -5,20 +5,21 @@ import {
   FormControl,
   Text,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
 import debounce from "lodash.debounce";
 import { useState, useMemo } from "react";
 
 export const SearchForm = () => {
   const [suggestions, setSuggestions] = useState([]);
+  const [typing, setTyping] = useState(false);
   const [limit, setLimit] = useState(0);
 
   const inputHandler = (event) => {
-    console.log("sending");
     updateSuggestion(event);
   };
 
-  const debouncedHandler = debounce(inputHandler, 200);
+  const debouncedHandler = useMemo(() => debounce(inputHandler, 250), []);
 
   async function updateSuggestion(event) {
     if (event.target.value === "") {
@@ -29,14 +30,15 @@ export const SearchForm = () => {
       ).then((res) => res.json());
       setSuggestions(data.json.data);
     }
+    setTyping(false);
   }
 
   return (
     <Box
       sx={{
         display: "grid",
-        width: "100%",
-        height: "100%",
+        width: "100vw",
+        height: "100vh",
         gridTemplateAreas: `
           "search-area"
           "suggestion"
@@ -51,14 +53,13 @@ export const SearchForm = () => {
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          height: "100%",
           alignItems: "center",
           justifyContent: "flex-end",
         }}
       >
         <FormControl
           sx={{
-            width: "50%",
+            width: "70%",
             display: "grid",
             gap: "5px",
             gridTemplateAreas: `
@@ -69,7 +70,10 @@ export const SearchForm = () => {
         >
           <Input
             type="text"
-            onChange={debouncedHandler}
+            onChange={(event) => {
+              setTyping(true);
+              debouncedHandler(event);
+            }}
             name="breed"
             placeholder="Enter a dog breed"
             sx={{
@@ -109,12 +113,38 @@ export const SearchForm = () => {
       >
         <Box
           sx={{
-            width: "50%",
+            width: "70%",
+            height: "50vh",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "auto",
+            padding: "2px",
+            gap: "5px",
           }}
         >
-          {suggestions.map((breed) => {
-            return <Text key={`${breed}`}>{breed}</Text>;
-          })}
+          {typing ? (
+            <Spinner />
+          ) : (
+            suggestions.map((breed) => {
+              return (
+                <Text
+                  key={`${breed}`}
+                  sx={{
+                    backgroundColor: "#CBD5E0",
+                    cursor: "pointer",
+                    borderRadius: "5px",
+                    padding: "3px",
+                    "&:hover": {
+                      color: "white",
+                      backgroundColor: "#4A5568",
+                    },
+                  }}
+                >
+                  {breed}
+                </Text>
+              );
+            })
+          )}
         </Box>
       </Box>
     </Box>
