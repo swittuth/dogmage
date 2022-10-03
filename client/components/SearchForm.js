@@ -15,6 +15,7 @@ export const SearchForm = () => {
   const [typing, setTyping] = useState(false);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(0);
+  const [imageArray, setImageArray] = useState([]);
 
   const inputHandler = (event) => {
     updateSuggestion(event);
@@ -37,6 +38,24 @@ export const SearchForm = () => {
       setSuggestions(data.json.data);
     }
     setTyping(false);
+  }
+
+  async function getImages() {
+    const url = "http://localhost:3011/dog/images";
+    const [breed, subBreed] = search.split(" ");
+    let dogImages = null;
+
+    if (typeof subBreed === "undefined") {
+      dogImages = await fetch(`${url}/${breed}/${limit}`).then((res) =>
+        res.json()
+      );
+    } else {
+      dogImages = await fetch(`${url}/${breed}/${subBreed}/${limit}`).then(
+        (res) => res.json()
+      );
+    }
+    setImageArray(dogImages.images);
+    console.log(dogImages);
   }
 
   return (
@@ -93,18 +112,22 @@ export const SearchForm = () => {
             sx={{
               gridArea: "limit",
             }}
+            onChange={(event) => {
+              setLimit(event.target.value);
+            }}
           >
             <option value={1}>1</option>
             <option value={5}>5</option>
             <option value={10}>10</option>
             <option value={15}>15</option>
-            <option value="All">All</option>
+            <option value="all">All</option>
           </Select>
           <Button
             variant="outline"
             sx={{
               gridArea: "fetch",
             }}
+            onClick={getImages}
           >
             Fetch
           </Button>

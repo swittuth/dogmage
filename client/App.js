@@ -1,5 +1,5 @@
-import { SearchForm } from "./SearchForm";
-import { AnimatedLogo } from "./AnimatedLogo";
+import { SearchForm } from "./components/SearchForm";
+import { AnimatedLogo } from "./components/AnimatedLogo";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "./styling/theme";
 
