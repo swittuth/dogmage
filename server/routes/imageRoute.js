@@ -30,4 +30,28 @@ imageRoute.get("/:breed/:limit", async (ctx, next) => {
   };
 });
 
+imageRoute.get("/:breed/:subBreed/all", async (ctx, next) => {
+  const { breed, subBreed } = ctx.params;
+  const imageList = await fetch(`${url}/${breed}/${subBreed}/images`).then(
+    (res) => res.json()
+  );
+
+  ctx.body = {
+    status: 200,
+    images: imageList.message,
+  };
+});
+
+imageRoute.get("/:breed/:subBreed/:limit", async (ctx, next) => {
+  const { breed, subBreed, limit } = ctx.params;
+  const imageList = await fetch(
+    `${url}/${breed}/${subBreed}/images/random/${limit}`
+  ).then((res) => res.json());
+
+  ctx.body = {
+    status: 200,
+    images: imageList.message,
+  };
+});
+
 export { imageRoute };
