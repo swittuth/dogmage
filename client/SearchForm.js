@@ -5,37 +5,40 @@ import {
   FormControl,
   Text,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
-import { update } from "lodash";
-import { useState, useEffect } from "react";
+import debounce from "lodash.debounce";
+import { useState, useMemo } from "react";
 
 export const SearchForm = () => {
   const [suggestions, setSuggestions] = useState([]);
-  const [search, setSearch] = useState([]);
+  const [typing, setTyping] = useState(false);
   const [limit, setLimit] = useState(0);
 
-  useEffect(() => {
-    updateSuggestion();
-  }, [search]);
+  const inputHandler = (event) => {
+    updateSuggestion(event);
+  };
 
-  async function updateSuggestion() {
-    const data = await fetch(
-      "http://localhost:3011/dog/breed/suggestion/" + search
-    ).then((res) => res.json());
+  const debouncedHandler = useMemo(() => debounce(inputHandler, 250), []);
 
-    if (data.json.data.length === 0) {
+  async function updateSuggestion(event) {
+    if (event.target.value === "") {
       setSuggestions([]);
     } else {
+      const data = await fetch(
+        "http://localhost:3011/dog/breed/suggestion/" + event.target.value
+      ).then((res) => res.json());
       setSuggestions(data.json.data);
     }
+    setTyping(false);
   }
 
   return (
     <Box
       sx={{
         display: "grid",
-        width: "100%",
-        height: "100%",
+        width: "100vw",
+        height: "100vh",
         gridTemplateAreas: `
           "search-area"
           "suggestion"
@@ -50,14 +53,13 @@ export const SearchForm = () => {
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          height: "100%",
           alignItems: "center",
           justifyContent: "flex-end",
         }}
       >
         <FormControl
           sx={{
-            width: "50%",
+            width: "70%",
             display: "grid",
             gap: "5px",
             gridTemplateAreas: `
@@ -69,8 +71,8 @@ export const SearchForm = () => {
           <Input
             type="text"
             onChange={(event) => {
-              console.log(event.target.value);
-              setSearch(event.target.value);
+              setTyping(true);
+              debouncedHandler(event);
             }}
             name="breed"
             placeholder="Enter a dog breed"
@@ -111,12 +113,38 @@ export const SearchForm = () => {
       >
         <Box
           sx={{
-            width: "50%",
+            width: "70%",
+            height: "50vh",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "auto",
+            padding: "2px",
+            gap: "5px",
           }}
         >
-          {suggestions.map((breed) => {
-            return <Text>{breed}</Text>;
-          })}
+          {typing ? (
+            <Spinner />
+          ) : (
+            suggestions.map((breed) => {
+              return (
+                <Text
+                  key={`${breed}`}
+                  sx={{
+                    backgroundColor: "#CBD5E0",
+                    cursor: "pointer",
+                    borderRadius: "5px",
+                    padding: "3px",
+                    "&:hover": {
+                      color: "white",
+                      backgroundColor: "#4A5568",
+                    },
+                  }}
+                >
+                  {breed}
+                </Text>
+              );
+            })
+          )}
         </Box>
       </Box>
     </Box>
