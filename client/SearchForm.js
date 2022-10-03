@@ -6,17 +6,19 @@ import {
   Text,
   Select,
 } from "@chakra-ui/react";
-import { update } from "lodash";
-import { eventNames } from "process";
-import { useState, useEffect } from "react";
+import debounce from "lodash.debounce";
+import { useState, useMemo } from "react";
 
 export const SearchForm = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [limit, setLimit] = useState(0);
 
-  // useEffect(() => {
-  //   updateSuggestion();
-  // }, [search]);
+  const inputHandler = (event) => {
+    console.log("sending");
+    updateSuggestion(event);
+  };
+
+  const debouncedHandler = debounce(inputHandler, 200);
 
   async function updateSuggestion(event) {
     if (event.target.value === "") {
@@ -67,9 +69,7 @@ export const SearchForm = () => {
         >
           <Input
             type="text"
-            onChange={(event) => {
-              updateSuggestion(event);
-            }}
+            onChange={debouncedHandler}
             name="breed"
             placeholder="Enter a dog breed"
             sx={{
