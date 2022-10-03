@@ -22,7 +22,7 @@ breedRoute.get("/:breed/:type", async (ctx, next) => {
   }
 
   ctx.body = {
-    status: "200",
+    status: 200,
     json: {
       data: suggestions,
     },
@@ -43,7 +43,7 @@ breedRoute.get("/:breed", async (ctx, next) => {
   }
 
   ctx.body = {
-    status: "200",
+    status: 200,
     json: {
       data: suggestions,
     },
