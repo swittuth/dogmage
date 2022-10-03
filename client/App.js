@@ -18,6 +18,7 @@ export const App = () => {
       >
         {/* <AnimatedLogo /> */}
         {imageArray.length <= 0 ? <SearchForm /> : <Carousel />}
+        {/* <Carousel /> */}
       </InfoContext.Provider>
     </ChakraProvider>
   );
