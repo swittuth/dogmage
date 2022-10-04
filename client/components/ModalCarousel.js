@@ -24,7 +24,14 @@ export const ModalCarousel = () => {
       />
       <ModalContent>
         <ModalHeader>
-          <Text color="#C05621">{startCase(search)}</Text>
+          <Text
+            bgGradient="linear(to-r, #D69E2E, #DD6B20)"
+            bgClip="text"
+            fontSize="2xl"
+            fontWeight="bold"
+          >
+            {startCase(search)}
+          </Text>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
