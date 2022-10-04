@@ -12,8 +12,10 @@ import { useMemo, useContext } from "react";
 import debounce from "lodash.debounce";
 import { Suggestions } from "./Suggestions";
 import "../styling/searchForm.css";
+import { motion } from "framer-motion";
+import { fill } from "lodash";
 
-export const SearchForm = () => {
+export const SearchForm = ({ fillDuration, appearDuration }) => {
   const {
     setSuggestions,
     setTyping,
@@ -23,6 +25,16 @@ export const SearchForm = () => {
     setImageArray,
     search,
   } = useContext(InfoContext);
+
+  const fillAnimation = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: {
+      duration: appearDuration,
+      ease: "easeInOut",
+      delay: fillDuration,
+    },
+  };
 
   const inputHandler = (event) => {
     updateSuggestion(event);
@@ -65,7 +77,7 @@ export const SearchForm = () => {
   }
 
   return (
-    <form className="search-form">
+    <motion.form className="search-form" {...fillAnimation}>
       <FormLabel>Search Your Dog</FormLabel>
       <VStack>
         <FormControl isRequired>
@@ -129,6 +141,6 @@ export const SearchForm = () => {
           Fetch
         </Button>
       </VStack>
-    </form>
+    </motion.form>
   );
 };
