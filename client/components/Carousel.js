@@ -19,8 +19,6 @@ export const Carousel = () => {
         slidesPerView={1}
         mousewheel={true}
         pagination={{ clickable: true }}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         {imageArray.map((image) => {
           return (

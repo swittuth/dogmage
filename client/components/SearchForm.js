@@ -51,7 +51,6 @@ export const SearchForm = () => {
     const url = "http://localhost:3011/dog/images";
     const [breed, subBreed] = search.split(" ");
     let dogImages = null;
-
     if (typeof subBreed === "undefined") {
       dogImages = await fetch(`${url}/${breed}/${limit}`).then((res) =>
         res.json()
@@ -62,13 +61,14 @@ export const SearchForm = () => {
       );
     }
     setImageArray(dogImages.images);
+    console.log(`${url}/${breed}/${limit}`);
   }
 
   return (
     <form className="search-form">
       <FormLabel>Search Your Dog</FormLabel>
       <VStack>
-        <FormControl>
+        <FormControl isRequired>
           <Input
             autoComplete="off"
             type="text"
@@ -88,6 +88,7 @@ export const SearchForm = () => {
             sx={{
               position: "absolute",
               display: "flex",
+              borderRadius: "5px",
               flexDirection: "column",
               alignItems: "center",
               minHeight: "0px",
@@ -101,21 +102,23 @@ export const SearchForm = () => {
             <Suggestions />
           </Box>
         </FormControl>
-        <Select
-          placeholder="Limit"
-          sx={{
-            gridArea: "limit",
-          }}
-          onChange={(event) => {
-            setLimit(event.target.value);
-          }}
-        >
-          <option value={1}>1</option>
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={15}>15</option>
-          <option value="all">All</option>
-        </Select>
+        <FormControl isRequired>
+          <Select
+            placeholder="Limit"
+            sx={{
+              gridArea: "limit",
+            }}
+            onChange={(event) => {
+              setLimit(event.target.value);
+            }}
+          >
+            <option value={1}>1</option>
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+            <option value="all">All</option>
+          </Select>
+        </FormControl>
         <Button
           variant="outline"
           sx={{

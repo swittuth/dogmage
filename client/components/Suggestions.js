@@ -21,9 +21,9 @@ export const Suggestions = () => {
               }}
               sx={{
                 backgroundColor: "#CBD5E0",
+                transitionDuration: "0.2s",
                 width: "100%",
                 cursor: "pointer",
-                borderRadius: "5px",
                 padding: "3px",
                 "&:hover": {
                   color: "white",
