@@ -7,7 +7,6 @@ export const AnimatedLogo = () => {
       sx={{
         height: "30vh",
         display: "flex",
-        paddingTop: "30px",
         justifyContent: "center",
       }}
     >

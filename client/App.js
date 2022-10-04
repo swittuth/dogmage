@@ -1,4 +1,4 @@
-import { SearchForm } from "./components/SearchForm";
+import { SearchContainer } from "./components/SearchContainer";
 import { AnimatedLogo } from "./components/AnimatedLogo";
 import { InfoContext } from "./infocontext";
 import { ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
@@ -8,30 +8,28 @@ import { Carousel } from "./components/Carousel";
 
 export const App = () => {
   const [imageArray, setImageArray] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  const [typing, setTyping] = useState(false);
+  const [search, setSearch] = useState("");
+  const [limit, setLimit] = useState(0);
+
   return (
     <ChakraProvider theme={theme}>
       <InfoContext.Provider
         value={{
           imageArray,
           setImageArray,
+          suggestions,
+          setSuggestions,
+          typing,
+          setTyping,
+          search,
+          setSearch,
+          limit,
+          setLimit,
         }}
       >
-        <Grid
-          templateAreas={`
-            "logo"
-            "search"
-          `}
-          templateRows="1fr 2fr"
-          templateColumns={"1fr"}
-        >
-          <GridItem area="logo">
-            <AnimatedLogo />
-          </GridItem>
-          <GridItem area="search">
-            {imageArray.length <= 0 ? <SearchForm /> : <Carousel />}
-          </GridItem>
-        </Grid>
-        {/* <Carousel /> */}
+        {imageArray.length <= 0 ? <SearchContainer /> : <Carousel />}
       </InfoContext.Provider>
     </ChakraProvider>
   );
