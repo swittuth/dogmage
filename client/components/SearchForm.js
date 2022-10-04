@@ -62,8 +62,8 @@ export const SearchForm = () => {
     <Box
       sx={{
         display: "grid",
+        height: "65vh",
         width: "100vw",
-        height: "100vh",
         gridTemplateAreas: `
           "search-area"
           "suggestion"
