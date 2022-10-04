@@ -3,7 +3,6 @@ import {
   Box,
   Input,
   FormControl,
-  FormLabel,
   Text,
   Select,
   Spinner,
@@ -164,6 +163,7 @@ export const SearchForm = () => {
                   key={`${breed}`}
                   onClick={() => {
                     setSearch(breed);
+                    setSuggestions([]);
                   }}
                   sx={{
                     backgroundColor: "#CBD5E0",
