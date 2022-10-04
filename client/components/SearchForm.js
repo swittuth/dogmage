@@ -1,23 +1,28 @@
 import {
-  Button,
-  Box,
-  Input,
   FormControl,
   FormLabel,
-  Text,
+  Input,
+  Box,
   Select,
-  Spinner,
+  Button,
+  VStack,
 } from "@chakra-ui/react";
-import debounce from "lodash.debounce";
-import { useState, useMemo, useContext } from "react";
 import { InfoContext } from "../infocontext";
+import { useMemo, useContext } from "react";
+import debounce from "lodash.debounce";
+import { Suggestions } from "./Suggestions";
+import "../styling/searchForm.css";
 
 export const SearchForm = () => {
-  const [suggestions, setSuggestions] = useState([]);
-  const [typing, setTyping] = useState(false);
-  const [search, setSearch] = useState("");
-  const [limit, setLimit] = useState(0);
-  const { imageArray, setImageArray } = useContext(InfoContext);
+  const {
+    setSuggestions,
+    setTyping,
+    setSearch,
+    limit,
+    setLimit,
+    setImageArray,
+    search,
+  } = useContext(InfoContext);
 
   const inputHandler = (event) => {
     updateSuggestion(event);
@@ -46,7 +51,6 @@ export const SearchForm = () => {
     const url = "http://localhost:3011/dog/images";
     const [breed, subBreed] = search.split(" ");
     let dogImages = null;
-
     if (typeof subBreed === "undefined") {
       dogImages = await fetch(`${url}/${breed}/${limit}`).then((res) =>
         res.json()
@@ -57,44 +61,16 @@ export const SearchForm = () => {
       );
     }
     setImageArray(dogImages.images);
+    console.log(`${url}/${breed}/${limit}`);
   }
 
   return (
-    <Box
-      sx={{
-        display: "grid",
-        width: "100vw",
-        height: "100vh",
-        gridTemplateAreas: `
-          "search-area"
-          "suggestion"
-        `,
-        gridTemplateRows: "5fr 5fr",
-        gridTemplateColumns: "1fr",
-      }}
-    >
-      <Box
-        sx={{
-          gridArea: "search-area",
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "flex-end",
-        }}
-      >
-        <FormControl
-          sx={{
-            width: "70%",
-            display: "grid",
-            gap: "5px",
-            gridTemplateAreas: `
-              "search limit fetch"
-            `,
-            gridTemplateColumns: "7fr 2fr 1fr",
-          }}
-        >
+    <form className="search-form">
+      <FormLabel>Search Your Dog</FormLabel>
+      <VStack>
+        <FormControl isRequired>
           <Input
+            autoComplete="off"
             type="text"
             onChange={(event) => {
               setSearch(event.target.value);
@@ -108,6 +84,25 @@ export const SearchForm = () => {
               gridArea: "search",
             }}
           />
+          <Box
+            sx={{
+              position: "absolute",
+              display: "flex",
+              borderRadius: "5px",
+              flexDirection: "column",
+              alignItems: "center",
+              minHeight: "0px",
+              maxHeight: "200px",
+              overflow: "auto",
+              width: "100%",
+              background: "white",
+              zIndex: 1,
+            }}
+          >
+            <Suggestions />
+          </Box>
+        </FormControl>
+        <FormControl isRequired>
           <Select
             placeholder="Limit"
             sx={{
@@ -123,67 +118,17 @@ export const SearchForm = () => {
             <option value={15}>15</option>
             <option value="all">All</option>
           </Select>
-          <Button
-            variant="outline"
-            sx={{
-              gridArea: "fetch",
-            }}
-            onClick={getImages}
-          >
-            Fetch
-          </Button>
         </FormControl>
-      </Box>
-      <Box
-        sx={{
-          width: "100%",
-          gridArea: "suggestion",
-          display: "flex",
-          justifyContent: "center",
-          padding: "3px",
-        }}
-      >
-        <Box
+        <Button
+          variant="outline"
           sx={{
-            width: "70%",
-            height: "50vh",
-            display: "flex",
-            flexDirection: "column",
-            overflow: "auto",
-            padding: "2px",
-            gap: "5px",
-            alignItems: "center",
+            gridArea: "fetch",
           }}
+          onClick={getImages}
         >
-          {typing ? (
-            <Spinner />
-          ) : (
-            suggestions.map((breed) => {
-              return (
-                <Text
-                  key={`${breed}`}
-                  onClick={() => {
-                    setSearch(breed);
-                  }}
-                  sx={{
-                    backgroundColor: "#CBD5E0",
-                    width: "100%",
-                    cursor: "pointer",
-                    borderRadius: "5px",
-                    padding: "3px",
-                    "&:hover": {
-                      color: "white",
-                      backgroundColor: "#4A5568",
-                    },
-                  }}
-                >
-                  {breed}
-                </Text>
-              );
-            })
-          )}
-        </Box>
-      </Box>
-    </Box>
+          Fetch
+        </Button>
+      </VStack>
+    </form>
   );
 };
