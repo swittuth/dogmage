@@ -78,7 +78,7 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
 
   return (
     <motion.form className="search-form" {...fillAnimation}>
-      <FormLabel>Search Your Dog</FormLabel>
+      <FormLabel>Search A Dog's Image</FormLabel>
       <VStack>
         <FormControl isRequired>
           <Input
@@ -117,9 +117,6 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
         <FormControl isRequired>
           <Select
             placeholder="Limit"
-            sx={{
-              gridArea: "limit",
-            }}
             onChange={(event) => {
               setLimit(event.target.value);
             }}
@@ -132,11 +129,15 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
           </Select>
         </FormControl>
         <Button
-          variant="outline"
-          sx={{
-            gridArea: "fetch",
-          }}
+          variant="solid"
+          bg="#F6AD55"
+          color="#FFFAF0"
           onClick={getImages}
+          sx={{
+            "&:hover": {
+              backgroundColor: "#ED8936",
+            },
+          }}
         >
           Fetch
         </Button>
