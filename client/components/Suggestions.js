@@ -8,7 +8,7 @@ export const Suggestions = () => {
 
   return (
     <>
-      {typing ? (
+      {typing && suggestions.length <= 0 ? (
         <Spinner />
       ) : (
         suggestions.map((breed) => {
