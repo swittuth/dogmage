@@ -1,6 +1,11 @@
+:root {
+  --borRad: 10px;
+}
+
 .swiper {
   width: 100%;
   height: 500px;
+  border-radius: var(--borRad);
 }
 
 .swiper-slide {
@@ -21,6 +26,7 @@
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+  border-radius: var(--borRad);
 }
 
 .swiper-slide img {
@@ -28,4 +34,5 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: var(--borRad);
 }
