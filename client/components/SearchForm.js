@@ -2,12 +2,16 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Box,
   Select,
   Button,
+  VStack,
 } from "@chakra-ui/react";
 import { InfoContext } from "../infocontext";
 import { useMemo, useContext } from "react";
 import debounce from "lodash.debounce";
+import { Suggestions } from "./Suggestions";
+import "../styling/searchForm.css";
 
 export const SearchForm = () => {
   const {
@@ -61,32 +65,42 @@ export const SearchForm = () => {
   }
 
   return (
-    <form>
-      <FormControl
-        sx={{
-          width: "100%",
-          display: "grid",
-          gap: "5px",
-          gridTemplateAreas: `
-              "search limit fetch"
-            `,
-          gridTemplateColumns: "7fr 2fr 1fr",
-        }}
-      >
-        <Input
-          type="text"
-          onChange={(event) => {
-            setSearch(event.target.value);
-            setTyping(true);
-            debouncedHandler(event);
-          }}
-          value={search}
-          name="breed"
-          placeholder="Enter a dog breed"
-          sx={{
-            gridArea: "search",
-          }}
-        />
+    <form className="search-form">
+      <FormLabel>Search Your Dog</FormLabel>
+      <VStack>
+        <FormControl>
+          <Input
+            autoComplete="off"
+            type="text"
+            onChange={(event) => {
+              setSearch(event.target.value);
+              setTyping(true);
+              debouncedHandler(event);
+            }}
+            value={search}
+            name="breed"
+            placeholder="Enter a dog breed"
+            sx={{
+              gridArea: "search",
+            }}
+          />
+          <Box
+            sx={{
+              position: "absolute",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              minHeight: "0px",
+              maxHeight: "200px",
+              overflow: "auto",
+              width: "100%",
+              background: "white",
+              zIndex: 1,
+            }}
+          >
+            <Suggestions />
+          </Box>
+        </FormControl>
         <Select
           placeholder="Limit"
           sx={{
@@ -111,7 +125,7 @@ export const SearchForm = () => {
         >
           Fetch
         </Button>
-      </FormControl>
+      </VStack>
     </form>
   );
 };

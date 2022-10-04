@@ -5,7 +5,8 @@ export const AnimatedLogo = () => {
   return (
     <Box
       sx={{
-        height: "30vh",
+        width: "40%",
+        maxWidth: "250px",
         display: "flex",
         justifyContent: "center",
       }}
