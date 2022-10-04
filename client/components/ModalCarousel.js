@@ -6,17 +6,19 @@ import {
   ModalContent,
   ModalCloseButton,
   useDisclosure,
+  ModalHeader,
 } from "@chakra-ui/react";
 import { InfoContext } from "../infocontext";
 import { useContext } from "react";
 
 export const ModalCarousel = () => {
-  const { isOpen, onClose } = useContext(InfoContext);
+  const { isOpen, onClose, search } = useContext(InfoContext);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isCentered isOpen={isOpen} onClose={onClose} motionPreset="scale">
       <ModalOverlay />
       <ModalContent>
+        <ModalHeader>{search}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Carousel />
