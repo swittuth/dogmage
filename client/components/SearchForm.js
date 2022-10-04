@@ -13,7 +13,6 @@ import debounce from "lodash.debounce";
 import { Suggestions } from "./Suggestions";
 import "../styling/searchForm.css";
 import { motion } from "framer-motion";
-import { fill } from "lodash";
 
 export const SearchForm = ({ fillDuration, appearDuration }) => {
   const {
@@ -24,6 +23,7 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
     setLimit,
     setImageArray,
     search,
+    onOpen,
   } = useContext(InfoContext);
 
   const fillAnimation = {
@@ -73,7 +73,7 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
       );
     }
     setImageArray(dogImages.images);
-    console.log(`${url}/${breed}/${limit}`);
+    onOpen();
   }
 
   return (
