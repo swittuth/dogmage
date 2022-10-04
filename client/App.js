@@ -17,7 +17,7 @@ export const App = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [typing, setTyping] = useState(false);
   const [search, setSearch] = useState("");
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

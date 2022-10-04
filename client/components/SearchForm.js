@@ -3,6 +3,7 @@ import {
   FormLabel,
   Input,
   Box,
+  Text,
   Select,
   Button,
   VStack,
@@ -78,8 +79,17 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
 
   return (
     <motion.form className="search-form" {...fillAnimation}>
-      <FormLabel>Search Your Dog</FormLabel>
       <VStack>
+        <FormLabel>
+          <Text
+            bgGradient="linear(to-r, #D69E2E, #DD6B20)"
+            bgClip="text"
+            fontSize="2xl"
+            fontWeight="bold"
+          >
+            Search A Dog's Image
+          </Text>
+        </FormLabel>
         <FormControl isRequired>
           <Input
             autoComplete="off"
@@ -116,10 +126,7 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
         </FormControl>
         <FormControl isRequired>
           <Select
-            placeholder="Limit"
-            sx={{
-              gridArea: "limit",
-            }}
+            value={limit}
             onChange={(event) => {
               setLimit(event.target.value);
             }}
@@ -132,11 +139,15 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
           </Select>
         </FormControl>
         <Button
-          variant="outline"
-          sx={{
-            gridArea: "fetch",
-          }}
+          variant="solid"
+          bg="#F6AD55"
+          color="#FFFAF0"
           onClick={getImages}
+          sx={{
+            "&:hover": {
+              backgroundColor: "#ED8936",
+            },
+          }}
         >
           Fetch
         </Button>

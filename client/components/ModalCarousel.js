@@ -5,12 +5,13 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-  useDisclosure,
+  Text,
   ModalHeader,
   ModalFooter,
 } from "@chakra-ui/react";
 import { InfoContext } from "../infocontext";
 import { useContext } from "react";
+import { startCase } from "lodash";
 
 export const ModalCarousel = () => {
   const { isOpen, onClose, search } = useContext(InfoContext);
@@ -22,7 +23,16 @@ export const ModalCarousel = () => {
         backdropFilter="blur(50px) hue-rotate(90deg)"
       />
       <ModalContent>
-        <ModalHeader>{search}</ModalHeader>
+        <ModalHeader>
+          <Text
+            bgGradient="linear(to-r, #D69E2E, #DD6B20)"
+            bgClip="text"
+            fontSize="2xl"
+            fontWeight="bold"
+          >
+            {startCase(search)}
+          </Text>
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Carousel />
