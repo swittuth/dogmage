@@ -30,8 +30,8 @@ export const SearchContainer = () => {
       alignItems="center"
       gap="10px"
     >
-      <AnimatedLogo />
-      <SearchForm />
+      <AnimatedLogo drawDuration={0.5} fillDuration={0.5} />
+      <SearchForm fillDuration={0.9} appearDuration={0.5} />
     </Flex>
   );
 };
