@@ -1,21 +1,8 @@
-import {
-  Button,
-  Box,
-  Input,
-  FormControl,
-  Grid,
-  Flex,
-  GridItem,
-  Text,
-  Select,
-  Spinner,
-} from "@chakra-ui/react";
-import debounce from "lodash.debounce";
-import { useState, useMemo, useContext } from "react";
+import { Flex } from "@chakra-ui/react";
+import { useContext } from "react";
 import { InfoContext } from "../infocontext";
 import { AnimatedLogo } from "./AnimatedLogo";
-import { SearchForm } from "./SearchForm";
-import { Suggestions } from "./Suggestions";
+import { SearchForm } from "./SearchForm/SearchForm";
 
 export const SearchContainer = () => {
   const { typing, suggestions, setSearch, setSuggestions } =

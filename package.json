@@ -4,8 +4,13 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"parcel client/index.html\" \"nodemon server/server.js\"",
+    "dev": "concurrently \"parcel src/index.html\" \"nodemon server/server.js\"",
     "test": "react-scripts test"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)"
+    ]
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.10",

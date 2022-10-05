@@ -1,7 +1,6 @@
 import { SearchContainer } from "./components/SearchContainer";
 import { InfoContext } from "./infocontext";
-import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
-import { theme } from "./styling/theme";
+import { useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { ModalCarousel } from "./components/ModalCarousel";
 

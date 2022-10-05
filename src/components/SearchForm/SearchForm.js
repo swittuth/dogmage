@@ -8,11 +8,11 @@ import {
   Button,
   VStack,
 } from "@chakra-ui/react";
-import { InfoContext } from "../infocontext";
+import { InfoContext } from "../../infocontext";
 import { useMemo, useContext } from "react";
 import debounce from "lodash.debounce";
-import { Suggestions } from "./Suggestions";
-import "../styling/searchForm.css";
+import { Suggestions } from "../Suggestions";
+import "../../styling/searchForm.css";
 import { motion } from "framer-motion";
 
 export const SearchForm = ({ fillDuration, appearDuration }) => {
