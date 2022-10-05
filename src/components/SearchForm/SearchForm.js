@@ -1,6 +1,7 @@
 import {
   FormControl,
   FormLabel,
+  FormErrorMessage,
   Input,
   Select,
   Button,
@@ -13,6 +14,7 @@ import "../../styling/searchForm.css";
 import { motion } from "framer-motion";
 import { Title } from "../Title/Title";
 import { SuggestionsContainer } from "../SuggestionsContainer";
+import { startCase } from "lodash";
 
 export const SearchForm = ({ fillDuration, appearDuration }) => {
   const {
@@ -23,6 +25,8 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
     setLimit,
     setImageArray,
     search,
+    notFound,
+    setNotFound,
     onOpen,
   } = useContext(InfoContext);
 
@@ -73,8 +77,15 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
           (res) => res.json()
         );
       }
-      setImageArray(dogImages.images);
-      onOpen();
+      if (Array.isArray(dogImages.images)) {
+        setImageArray(dogImages.images);
+        onOpen();
+      } else {
+        setNotFound(true);
+        setTimeout(() => {
+          setNotFound(false);
+        }, 3000);
+      }
     }
   }
 
@@ -128,6 +139,11 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
         >
           Fetch
         </Button>
+        <FormControl isInvalid={notFound}>
+          <FormErrorMessage>
+            {startCase(search)}'s images don't exist
+          </FormErrorMessage>
+        </FormControl>
       </VStack>
     </motion.form>
   );

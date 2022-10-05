@@ -10,6 +10,7 @@ export const App = () => {
   const [typing, setTyping] = useState(false);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(1);
+  const [notFound, setNotFound] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -25,6 +26,8 @@ export const App = () => {
         setSearch,
         limit,
         setLimit,
+        notFound,
+        setNotFound,
         isOpen,
         onOpen,
         onClose,
