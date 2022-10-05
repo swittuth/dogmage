@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"parcel src/index.html\" \"nodemon server/server.js\"",
+    "start": "concurrently \"parcel src/index.html\" \"nodemon server/server.js\"",
     "test": "react-scripts test"
   },
   "jest": {
