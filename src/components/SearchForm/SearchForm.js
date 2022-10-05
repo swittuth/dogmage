@@ -11,10 +11,10 @@ import {
 import { InfoContext } from "../../infocontext";
 import { useMemo, useContext } from "react";
 import debounce from "lodash.debounce";
-import { Suggestions } from "../Suggestions";
 import "../../styling/searchForm.css";
 import { motion } from "framer-motion";
 import { Title } from "../Title/Title";
+import { SuggestionsContainer } from "../SuggestionsContainer";
 
 export const SearchForm = ({ fillDuration, appearDuration }) => {
   const {
@@ -100,23 +100,7 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
               gridArea: "search",
             }}
           />
-          <Box
-            sx={{
-              position: "absolute",
-              display: "flex",
-              borderRadius: "5px",
-              flexDirection: "column",
-              alignItems: "center",
-              minHeight: "0px",
-              maxHeight: "200px",
-              overflow: "auto",
-              width: "100%",
-              background: "white",
-              zIndex: 1,
-            }}
-          >
-            <Suggestions />
-          </Box>
+          <SuggestionsContainer />
         </FormControl>
         <FormControl isRequired>
           <Select
