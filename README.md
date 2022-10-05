@@ -17,3 +17,4 @@ Love dogs and want to see them more? Dogmage is an application that allows you t
 9. React-Testing-Library
 
 # Demo
+![Dogmage Demo](https://github.com/swittuth/dogmage/blob/main/dogmage_demo.gif)
