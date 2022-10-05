@@ -11,5 +11,9 @@ it("renders search form", () => {
     </ChakraProvider>
   );
 
-  const el = screen.getByRole("button");
+  const titleText = screen.getByText(/search a dog's image/i);
+  const fetchButton = screen.getByRole("button");
+
+  expect(titleText).toBeInTheDocument();
+  expect(fetchButton).toBeInTheDocument();
 });

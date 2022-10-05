@@ -12,6 +12,7 @@ import {
 import { InfoContext } from "../infocontext";
 import { useContext } from "react";
 import { startCase } from "lodash";
+import { Title } from "./Title/Title";
 
 export const ModalCarousel = () => {
   const { isOpen, onClose, search } = useContext(InfoContext);
@@ -24,14 +25,7 @@ export const ModalCarousel = () => {
       />
       <ModalContent>
         <ModalHeader>
-          <Text
-            bgGradient="linear(to-r, #D69E2E, #DD6B20)"
-            bgClip="text"
-            fontSize="2xl"
-            fontWeight="bold"
-          >
-            {startCase(search)}
-          </Text>
+          <Title text={startCase(search)} />
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>

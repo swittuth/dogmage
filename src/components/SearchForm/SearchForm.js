@@ -14,6 +14,7 @@ import debounce from "lodash.debounce";
 import { Suggestions } from "../Suggestions";
 import "../../styling/searchForm.css";
 import { motion } from "framer-motion";
+import { Title } from "../Title/Title";
 
 export const SearchForm = ({ fillDuration, appearDuration }) => {
   const {
@@ -81,14 +82,7 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
     <motion.form className="search-form" {...fillAnimation}>
       <VStack>
         <FormLabel>
-          <Text
-            bgGradient="linear(to-r, #D69E2E, #DD6B20)"
-            bgClip="text"
-            fontSize="2xl"
-            fontWeight="bold"
-          >
-            Search A Dog's Image
-          </Text>
+          <Title text="Search A Dog's Image" />
         </FormLabel>
         <FormControl isRequired>
           <Input
