@@ -23,6 +23,7 @@ Love dogs and want to see them more? Dogmage is an application that allows you t
 1. ```git clone``` the repository
 2. ```npm install```
 3. ```npm start```
-4. Enter dog breed
-5. Select limit
-6. Click button and view images
+4. Enter in browser: localhost:1234
+5. Enter dog breed
+6. Select limit
+7. Click button and view images
