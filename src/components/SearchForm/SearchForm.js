@@ -140,9 +140,7 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
           Fetch
         </Button>
         <FormControl isInvalid={notFound}>
-          <FormErrorMessage>
-            {startCase(search)}'s images don't exist
-          </FormErrorMessage>
+          <FormErrorMessage>Images for breed don't exist</FormErrorMessage>
         </FormControl>
       </VStack>
     </motion.form>
