@@ -1,4 +1,4 @@
-import { Carousel } from "./Carousel";
+import { Carousel } from "./Carousel/Carousel";
 import {
   Modal,
   ModalBody,

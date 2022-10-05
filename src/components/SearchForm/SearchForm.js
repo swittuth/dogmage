@@ -96,9 +96,6 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
             value={search}
             name="breed"
             placeholder="Enter a dog breed"
-            sx={{
-              gridArea: "search",
-            }}
           />
           <SuggestionsContainer />
         </FormControl>
