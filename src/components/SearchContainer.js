@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { useContext } from "react";
 import { InfoContext } from "../infocontext";
-import { AnimatedLogo } from "./AnimatedLogo";
+import { AnimatedLogo } from "./AnimatedLogo/AnimatedLogo";
 import { SearchForm } from "./SearchForm/SearchForm";
 
 export const SearchContainer = () => {

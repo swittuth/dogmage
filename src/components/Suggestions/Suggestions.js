@@ -1,4 +1,4 @@
-import { InfoContext } from "../infocontext";
+import { InfoContext } from "../../infocontext";
 import { Spinner, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 
