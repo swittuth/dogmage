@@ -18,3 +18,11 @@ Love dogs and want to see them more? Dogmage is an application that allows you t
 
 # Demo
 ![Dogmage Demo](https://github.com/swittuth/dogmage/blob/main/dogmage_demo.gif)
+
+# Installation
+1. ```git clone``` the repository
+2. ```npm install```
+3. ```npm run dev```
+4. Enter dog breed
+5. Select limit
+6. Click button and view images
