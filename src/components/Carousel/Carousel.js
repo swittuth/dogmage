@@ -22,7 +22,7 @@ export const Carousel = () => {
       >
         {imageArray.map((image) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={`${image}`}>
               <img src={image} />
             </SwiperSlide>
           );
