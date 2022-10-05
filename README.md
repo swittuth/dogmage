@@ -4,3 +4,16 @@
 
 # Introduction
 Love dogs and want to see them more? Dogmage is an application that allows you to enter a dog breed that you want to see, and the application will output a number of images for you to view. 
+
+# TechStack
+1. React.js
+2. Koa.js
+3. Chakra UI
+4. Framer Motion
+5. Swiper
+6. Lodash
+7. Parcel
+8. Jest
+9. React-Testing-Library
+
+# Demo
