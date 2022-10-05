@@ -2,8 +2,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Box,
-  Text,
   Select,
   Button,
   VStack,
@@ -62,20 +60,22 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
   }
 
   async function getImages() {
-    const url = "http://localhost:3011/dog/images";
-    const [breed, subBreed] = search.split(" ");
-    let dogImages = null;
-    if (typeof subBreed === "undefined") {
-      dogImages = await fetch(`${url}/${breed}/${limit}`).then((res) =>
-        res.json()
-      );
-    } else {
-      dogImages = await fetch(`${url}/${breed}/${subBreed}/${limit}`).then(
-        (res) => res.json()
-      );
+    if (search !== "") {
+      const url = "http://localhost:3011/dog/images";
+      const [breed, subBreed] = search.split(" ");
+      let dogImages = null;
+      if (typeof subBreed === "undefined") {
+        dogImages = await fetch(`${url}/${breed}/${limit}`).then((res) =>
+          res.json()
+        );
+      } else {
+        dogImages = await fetch(`${url}/${breed}/${subBreed}/${limit}`).then(
+          (res) => res.json()
+        );
+      }
+      setImageArray(dogImages.images);
+      onOpen();
     }
-    setImageArray(dogImages.images);
-    onOpen();
   }
 
   return (
@@ -84,7 +84,8 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
         <FormLabel>
           <Title text="Search A Dog's Image" />
         </FormLabel>
-        <FormControl isRequired>
+        <FormControl isRequired isInvalid={search === ""}>
+          <FormLabel>Dog Breed</FormLabel>
           <Input
             autoComplete="off"
             type="text"
@@ -100,6 +101,7 @@ export const SearchForm = ({ fillDuration, appearDuration }) => {
           <SuggestionsContainer />
         </FormControl>
         <FormControl isRequired>
+          <FormLabel>Limit</FormLabel>
           <Select
             value={limit}
             onChange={(event) => {
